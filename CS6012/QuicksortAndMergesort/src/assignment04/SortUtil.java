@@ -17,13 +17,13 @@ public class SortUtil {
     for (int i = 1; i < myArrayList.size(); i++) {
       index = myArrayList.get(i);
       int j = i;
-      while (j > 0 && comparator.compare(myArrayList.get(j-1), index) > 0) {
+      while (j > 0 && comparator.compare(myArrayList.get(j - 1), index) > 0) {
         myArrayList.add(j, myArrayList.get(j - 1));
         j--;
       }
       myArrayList.add(j, index);
     }
-
+    
   }
   
   /**
@@ -40,24 +40,19 @@ public class SortUtil {
    * @param comparator
    */
   public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
-    //need to call insertionSort() method somewhere in here, may have to reconfigure the code a bit
+    // need to call insertionSort() method somewhere in here, may have to
+    // reconfigure the code a bit
     /*
-     * FROM HIS SLIDES, pseudocode
-     void MergeSort(int[] arr, int start, int end) {
-     // arrays of size 1 are already sortedif(start >= end) {
-     *  return; 
-     *  }
-     *  int mid = (start + end) /2;
-     *  MergeSort(arr, start, mid); 
-     *  // left halfMergeSort(arr, mid+1, end); 
-     *  // right halfMerge(arr, start, mid, end); 
-     *  //merge halves}
-     *  
-     *  ///NEXT METHOD
-     *  void Merge(int[] arr, int[] temp, int start, int mid, int end){
-     *  int i1 = 0, i2 = mid;while(i1 < mid && i2 < end){
-     *  put smaller of arr[i1], arr[i2] in to temp increment appropriate i}
-     *  copy anything left over from larger half to tempcopy temp from (start to end) back int to arr (from start to end) }
+     * FROM HIS SLIDES, pseudocode void MergeSort(int[] arr, int start, int end) {
+     * // arrays of size 1 are already sortedif(start >= end) { return; } int mid =
+     * (start + end) /2; MergeSort(arr, start, mid); // left halfMergeSort(arr,
+     * mid+1, end); // right halfMerge(arr, start, mid, end); //merge halves}
+     * 
+     * ///NEXT METHOD void Merge(int[] arr, int[] temp, int start, int mid, int
+     * end){ int i1 = 0, i2 = mid;while(i1 < mid && i2 < end){ put smaller of
+     * arr[i1], arr[i2] in to temp increment appropriate i} copy anything left over
+     * from larger half to tempcopy temp from (start to end) back int to arr (from
+     * start to end) }
      */
   }
   
@@ -86,27 +81,22 @@ public class SortUtil {
     
   }
   
-	public static ArrayList<Integer> generateBestCase(int size){
-		//This method generates and returns an ArrayList of integers 1 to size in ascending order.
-		
-		ArrayList<Integer> myArrayList = new ArrayList<>();
-		
-		for(int i = 1; i <= size; i++){
-			
-			myArrayList.add(i);
-			
-			
-		}
-		
-		
-		
-		return myArrayList;
-
-	
-
-	
-	}
-	
+  public static ArrayList<Integer> generateBestCase(int size) {
+    // This method generates and returns an ArrayList of integers 1 to size in
+    // ascending order.
+    
+    ArrayList<Integer> myArrayList = new ArrayList<>();
+    
+    for (int i = 1; i <= size; i++) {
+      
+      myArrayList.add(i);
+      
+    }
+    
+    return myArrayList;
+    
+  }
+  
   /**
    * This method generates and returns an ArrayList of integers 1 to size in
    * permuted order (i,e., randomly ordered). I will show you in class how to
@@ -115,44 +105,38 @@ public class SortUtil {
    * @param size
    * @return
    */
-	public static ArrayList<Integer> generateAverageCase(int size){
-		
-		//This method generates and returns an ArrayList of integers 1 to size in 
-		//permuted order (i,e., randomly ordered). I will show you in class how to permute a list.
-		
-	  Random rand = new Random(17);
-		ArrayList<Integer> myArrayList = new ArrayList<>();
-		int [] array = new int [0];
-
-		for(int i = 1; i <= size; i++){
-
-			myArrayList.add(i);
-
-
-		}
-		
-		for(int i = 0; i < size; i++)
-	    swap(myArrayList, i, rand.nextInt(size));
-
-
-		return myArrayList;
-
-	
-
-	
-	}
-	
-	public static void swap(ArrayList<Integer> myArrayList, int i, int randNum){
-	  
-	  int temp;
-	  
-	  temp = myArrayList.get(i);
-	  myArrayList.set(i, myArrayList.get(randNum));
-	  myArrayList.set(randNum, temp);
-	  
-	  
-	}
-	
+  public static ArrayList<Integer> generateAverageCase(int size) {
+    
+    // This method generates and returns an ArrayList of integers 1 to size in
+    // permuted order (i,e., randomly ordered). I will show you in class how to
+    // permute a list.
+    
+    Random rand = new Random(17);
+    ArrayList<Integer> myArrayList = new ArrayList<>();
+    
+    for (int i = 1; i <= size; i++) {
+      
+      myArrayList.add(i);
+      
+    }
+    
+    for (int i = 0; i < size; i++)
+      swap(myArrayList, i, rand.nextInt(size));
+    
+    return myArrayList;
+    
+  }
+  
+  public static void swap(ArrayList<Integer> myArrayList, int i, int randNum) {
+    
+    int temp;
+    
+    temp = myArrayList.get(i);
+    myArrayList.set(i, myArrayList.get(randNum));
+    myArrayList.set(randNum, temp);
+    
+  }
+  
   /**
    * This method generates and returns an ArrayList of integers 1 to size in
    * descending order.
@@ -160,33 +144,21 @@ public class SortUtil {
    * @param size
    * @return
    */
-	public static ArrayList<Integer> generateWorstCase(int size){
-		
-
-	//This method generates and returns an ArrayList of integers 1 to size in descending order.
-	
-		
-		
-		ArrayList<Integer> myArrayList = new ArrayList<>();
-
-    for(int i = size; i >= 1; i--){
-
+  public static ArrayList<Integer> generateWorstCase(int size) {
+    
+    // This method generates and returns an ArrayList of integers 1 to size in
+    // descending order.
+    
+    ArrayList<Integer> myArrayList = new ArrayList<>();
+    
+    for (int i = size; i >= 1; i--) {
+      
       myArrayList.add(i);
-
-
+      
     }
-
-
-
+    
     return myArrayList;
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	
+    
+  }
+  
 }
