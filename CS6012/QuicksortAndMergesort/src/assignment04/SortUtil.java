@@ -77,9 +77,25 @@ public class SortUtil {
    * @param comparator
    */
   public static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
-    
+    quicksort(myArrayList, comparator, 0, myArrayList.size()-1);
   }
   
+  private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
+    //arrays of size 1 already sorted.
+    if(lo >= hi) {
+      return;
+    }
+    
+    int pivot_index = partition(myArrayList, lo, hi);
+  }
+  
+  private static <T> int partition(ArrayList<T> myArrayList, int lo, int hi) {
+    T pivot_value = myArrayList.get(hi);
+    int i = lo -1;
+    
+    return 0;
+  }
+
   public static ArrayList<Integer> generateBestCase(int size) {
     // This method generates and returns an ArrayList of integers 1 to size in
     // ascending order.
