@@ -86,12 +86,18 @@ public class SortUtil {
       return;
     }
     
-    int pivot_index = partition(myArrayList, lo, hi);
+    int pivotIndex = partition(myArrayList, comparator, lo, hi);
   }
   
-  private static <T> int partition(ArrayList<T> myArrayList, int lo, int hi) {
-    T pivot_value = myArrayList.get(hi);
-    int i = lo -1;
+  private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
+    T pivotValue = myArrayList.get(hi);
+    int i = lo - 1;
+    for (int j = lo; j < hi -1; j++) {
+      if(comparator.compare(myArrayList.get(j), pivotValue) < 0) {
+        i++;
+        swap(myArrayList, i, j);
+      }
+    }
     
     return 0;
   }
@@ -142,13 +148,13 @@ public class SortUtil {
     
   }
   
-  public static void swap(ArrayList<Integer> myArrayList, int i, int randNum) {
+  public static <T> void swap(ArrayList<T> myArrayList, int valueLHS, int valueRHS) {
     
-    int temp;
+    T temp;
     
-    temp = myArrayList.get(i);
-    myArrayList.set(i, myArrayList.get(randNum));
-    myArrayList.set(randNum, temp);
+    temp = myArrayList.get(valueLHS);
+    myArrayList.set(valueLHS, myArrayList.get(valueRHS));
+    myArrayList.set(valueRHS, temp);
     
   }
   
