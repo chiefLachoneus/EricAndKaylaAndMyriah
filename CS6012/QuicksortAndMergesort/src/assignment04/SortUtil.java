@@ -6,27 +6,24 @@ import java.util.Comparator;
 public class SortUtil {
   
   /**
+   * This generic method sorts the input array using an insertion sort and the
+   * input Comparator object.
    * 
-   * @param stringToSort
-   * @return
+   * @param item
+   * @param comparator
    */
-  public static String insertionSort(String stringToSort) {
-    // convert the array to characters, must be lowercase for proper comparison
-    char[] strArray = stringToSort.toLowerCase().toCharArray();
-    
-    // loop through the array and perform insertion sort
-    for (int i = 1; i < strArray.length; i++) {
-      char index = strArray[i];
+  public static <T> void insertionSort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
+    T index;
+    for (int i = 1; i < myArrayList.size(); i++) {
+      index = myArrayList.get(i);
       int j = i;
-      
-      while (j > 0 && strArray[j - 1] > index) {
-        strArray[j] = strArray[j - 1];
+      while (j > 0 && comparator.compare(myArrayList.get(j-1), index) > 0) {
+        myArrayList.add(j, myArrayList.get(j - 1));
         j--;
       }
-      strArray[j] = index;
+      myArrayList.add(j, index);
     }
-    // convert the array back to a string and return
-    return new String(strArray);
+    
   }
   
   /**
