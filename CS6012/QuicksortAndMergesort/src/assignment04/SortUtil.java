@@ -38,21 +38,82 @@ public class SortUtil {
    * @param myArrayList
    * @param comparator
    */
+  //Driver for mergeSort
   public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
     // need to call insertionSort() method somewhere in here, may have to
     // reconfigure the code a bit
-    /*
-     * FROM HIS SLIDES, pseudocode void MergeSort(int[] arr, int start, int end) {
-     * // arrays of size 1 are already sortedif(start >= end) { return; } int mid =
-     * (start + end) /2; MergeSort(arr, start, mid); // left halfMergeSort(arr,
-     * mid+1, end); // right halfMerge(arr, start, mid, end); //merge halves}
-     * 
-     * ///NEXT METHOD void Merge(int[] arr, int[] temp, int start, int mid, int
-     * end){ int i1 = 0, i2 = mid;while(i1 < mid && i2 < end){ put smaller of
-     * arr[i1], arr[i2] in to temp increment appropriate i} copy anything left over
-     * from larger half to tempcopy temp from (start to end) back int to arr (from
-     * start to end) }
-     */
+    
+    int start = 0;
+    int end = myArrayList.size() - 1;
+    ArrayList<T> tempArray = new ArrayList<T>(myArrayList.size());
+    
+    mergeSort(myArrayList, comparator, start, end, tempArray);
+    
+    
+    
+  }
+  //recursive mergeSort method
+  public static <T> void mergeSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end, ArrayList<T> tempArray){
+    
+    int mid = 0;
+    if(end > start){
+      
+      mid = (start + end) / 2;
+      
+      mergeSort(myArrayList, comparator, start, mid, tempArray);
+      mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
+      merge(myArrayList, comparator, start, mid, end, tempArray);
+      
+      
+      
+    }
+    
+    
+    
+  }
+  //Merges all the arrays into one
+  public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start,int mid, int end, ArrayList<T> tempArray){
+    //TODO: write a comparator and use insertionSort
+   
+    int k = start;
+    int i = start;
+    int j = mid;
+    
+    while(i < mid && j < end){
+      
+      if(comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0){
+        tempArray.set(k, myArrayList.get(i));
+        i++;
+      } else {
+        
+        tempArray.set(k, myArrayList.get(j));
+        j++;
+      }
+      
+        k++;
+        
+     }
+    
+    while(i < mid){
+      tempArray.set(k, myArrayList.get(i));
+      i++;
+      k++;
+      
+    } 
+    
+    while (j < end){
+      tempArray.set(k, myArrayList.get(j));
+      j++;
+      k++;
+      
+    }
+    
+    for(int x = 0; x < myArrayList.size(); x++){
+      
+      myArrayList.set(x, tempArray.get(x));
+    }
+    
+    
   }
   
   /**
