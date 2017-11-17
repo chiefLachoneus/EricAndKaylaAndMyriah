@@ -38,7 +38,7 @@ public class SortUtil {
    * @param myArrayList
    * @param comparator
    */
-  //Driver for mergeSort
+  // Driver for mergeSort
   public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
     // need to call insertionSort() method somewhere in here, may have to
     // reconfigure the code a bit
@@ -49,14 +49,14 @@ public class SortUtil {
     
     mergeSort(myArrayList, comparator, start, end, tempArray);
     
-    
-    
   }
-  //recursive mergeSort method
-  public static <T> void mergeSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end, ArrayList<T> tempArray){
+  
+  // recursive mergeSort method
+  public static <T> void mergeSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end,
+      ArrayList<T> tempArray) {
     
     int mid = 0;
-    if(end > start){
+    if (end > start) {
       
       mid = (start + end) / 2;
       
@@ -64,24 +64,22 @@ public class SortUtil {
       mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
       merge(myArrayList, comparator, start, mid, end, tempArray);
       
-      
-      
     }
     
-    
-    
   }
-  //Merges all the arrays into one
-  public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start,int mid, int end, ArrayList<T> tempArray){
-    //TODO: write a comparator and use insertionSort
-   
+  
+  // Merges all the arrays into one
+  public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int mid, int end,
+      ArrayList<T> tempArray) {
+    // TODO: write a comparator and use insertionSort
+    
     int k = start;
     int i = start;
     int j = mid;
     
-    while(i < mid && j < end){
+    while (i < mid && j < end) {
       
-      if(comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0){
+      if (comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0) {
         tempArray.set(k, myArrayList.get(i));
         i++;
       } else {
@@ -90,29 +88,28 @@ public class SortUtil {
         j++;
       }
       
-        k++;
-        
-     }
+      k++;
+      
+    }
     
-    while(i < mid){
+    while (i < mid) {
       tempArray.set(k, myArrayList.get(i));
       i++;
       k++;
       
-    } 
+    }
     
-    while (j < end){
+    while (j < end) {
       tempArray.set(k, myArrayList.get(j));
       j++;
       k++;
       
     }
     
-    for(int x = 0; x < myArrayList.size(); x++){
+    for (int x = 0; x < myArrayList.size(); x++) {
       
       myArrayList.set(x, tempArray.get(x));
     }
-    
     
   }
   
@@ -138,12 +135,12 @@ public class SortUtil {
    * @param comparator
    */
   public static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
-    quicksort(myArrayList, comparator, 0, myArrayList.size()-1);
+    quicksort(myArrayList, comparator, 0, myArrayList.size() - 1);
   }
   
   private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
-    //arrays of size 1 already sorted.
-    if(lo >= hi) {
+    // arrays of size 1 already sorted.
+    if (lo >= hi) {
       return;
     }
     
@@ -153,8 +150,8 @@ public class SortUtil {
   private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
     T pivotValue = myArrayList.get(hi);
     int i = lo - 1;
-    for (int j = lo; j < hi -1; j++) {
-      if(comparator.compare(myArrayList.get(j), pivotValue) < 0) {
+    for (int j = lo; j < hi - 1; j++) {
+      if (comparator.compare(myArrayList.get(j), pivotValue) < 0) {
         i++;
         swap(myArrayList, i, j);
       }
@@ -162,7 +159,7 @@ public class SortUtil {
     
     return 0;
   }
-
+  
   public static ArrayList<Integer> generateBestCase(int size) {
     // This method generates and returns an ArrayList of integers 1 to size in
     // ascending order.
