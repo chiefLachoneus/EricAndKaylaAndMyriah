@@ -23,7 +23,6 @@ public class SortUtil {
       }
       myArrayList.add(j, index);
     }
-    
   }
   
   /**
