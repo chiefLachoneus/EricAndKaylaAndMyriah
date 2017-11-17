@@ -2,6 +2,7 @@ package assignment04;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Random;
 
 public class SortUtil {
 	
@@ -63,7 +64,9 @@ public class SortUtil {
 		//This method generates and returns an ArrayList of integers 1 to size in 
 		//permuted order (i,e., randomly ordered). I will show you in class how to permute a list.
 		
+	  Random rand = new Random(17);
 		ArrayList<Integer> myArrayList = new ArrayList<>();
+		int [] array = new int [0];
 
 		for(int i = 1; i <= size; i++){
 
@@ -71,7 +74,9 @@ public class SortUtil {
 
 
 		}
-
+		
+		for(int i = 0; i < size; i++)
+	    swap(myArrayList, i, rand.nextInt(size));
 
 
 		return myArrayList;
@@ -80,11 +85,44 @@ public class SortUtil {
 
 	
 	}
+	
+	public static void swap(ArrayList<Integer> myArrayList, int i, int randNum){
+	  
+	  int temp;
+	  
+	  temp = myArrayList.get(i);
+	  myArrayList.set(i, myArrayList.get(randNum));
+	  myArrayList.set(randNum, temp);
+	  
+	  
+	}
+	
 	public static ArrayList<Integer> generateWorstCase(int size){
-		return null;
+		
 
 	//This method generates and returns an ArrayList of integers 1 to size in descending order.
 	
+		
+		
+		ArrayList<Integer> myArrayList = new ArrayList<>();
+
+    for(int i = size; i >= 1; i--){
+
+      myArrayList.add(i);
+
+
+    }
+
+
+
+    return myArrayList;
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	
