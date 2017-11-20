@@ -152,7 +152,7 @@ public class SortUtil {
   private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int left, int right) {
     // find pivot and swap with right bound. Could be done in various ways.
     Random rValue = new Random();
-    int pivotIndex = rValue.nextInt(right);
+    int pivotIndex = rValue.nextInt(right - left) + left;
     
     swap(myArrayList, pivotIndex, right);
     
