@@ -40,16 +40,16 @@ public class TestQuicksortAndMergeSort {
     
   }
   
-//  @Test
-//  public void testMergeSortStrings() {
-//    SortUtil.mergesort(testWords, new WordComparator());
-//    
-//    for(int i = 0; i < testWords.size(); i++) {
-//      System.out.println(testWords.get(i));
-//      assertTrue(testWords.get(i).equals(sortedWords.get(i)));
-//    }
-//  }
-//  
+  @Test
+  public void testMergeSortStrings() {
+    SortUtil.mergesort(testWords, new WordComparator());
+    
+    for(int i = 0; i < testWords.size(); i++) {
+      System.out.println(testWords.get(i));
+      assertTrue(testWords.get(i).equals(sortedWords.get(i)));
+    }
+  }
+  
   @Test
   public void testQuickSortStrings() {
     SortUtil.quicksort(testWords, new WordComparator());
