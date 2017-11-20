@@ -51,6 +51,16 @@ public class TestQuicksortAndMergeSort {
   }
   
   @Test
+  public void testMergeSortNumbers() {
+    SortUtil.mergesort(testNumbers, new NumberComparator());
+    
+    for(int i = 0; i < testNumbers.size(); i++) {
+      System.out.println(testNumbers.get(i));
+      assertTrue(testNumbers.get(i).equals(sortedNumbers.get(i)));
+    }
+  }
+  
+  @Test
   public void testQuickSortStrings() {
     SortUtil.quicksort(testWords, new WordComparator());
     
