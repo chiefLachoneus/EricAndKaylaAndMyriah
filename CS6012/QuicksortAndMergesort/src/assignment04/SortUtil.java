@@ -145,6 +145,8 @@ public class SortUtil {
     }
     
     int pivotIndex = partition(myArrayList, comparator, lo, hi);
+    quicksort(myArrayList, comparator, lo, pivotIndex);
+    quicksort(myArrayList, comparator, pivotIndex + 1, hi);
   }
   
   private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
