@@ -7,12 +7,12 @@ import java.util.Comparator;
 
 import org.junit.Test;
 
-public class SortUtilTest<T> {
-  private ArrayList<Integer> arrayListOfInts; 
-  private Comparator<? super T> comparator; 
+public class SortUtilTest {
+  private ArrayList<Integer> arrayListOfInts = new ArrayList<>();
+  
   
   @Test
-  public void setup() {
+  public void testMergesort() {
     arrayListOfInts.add(8);
     arrayListOfInts.add(10);
     arrayListOfInts.add(7);
@@ -23,20 +23,9 @@ public class SortUtilTest<T> {
     arrayListOfInts.add(2);
     arrayListOfInts.add(4);
     arrayListOfInts.add(9);
-    
-    comparator = (Comparator<? super T>) new WordComparator(); 
-    
-  }
-  
-  
-  @Test
-  public void test() {
-  }
-  
-  
-  @Test
-  public void testMergesort() {
  // public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator)
+    
+    SortUtil.mergesort(arrayListOfInts, new IntComparator());
     
     
   }
