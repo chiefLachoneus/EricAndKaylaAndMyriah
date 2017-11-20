@@ -12,16 +12,16 @@ public class SortUtil {
    * @param item
    * @param comparator
    */
-  public static <T> void insertionSort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
+  public static <T> void insertionSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end) {
     T index;
-    for (int i = 1; i < myArrayList.size(); i++) {
+    for (int i = start; i < end; i++) {
       index = myArrayList.get(i);
       int j = i;
       while (j > 0 && comparator.compare(myArrayList.get(j - 1), index) > 0) {
-        myArrayList.add(j, myArrayList.get(j - 1));
+        myArrayList.set(j, myArrayList.get(j - 1));
         j--;
       }
-      myArrayList.add(j, index);
+      myArrayList.set(j, index);
     }
   }
   
@@ -47,7 +47,11 @@ public class SortUtil {
     int end = myArrayList.size() - 1;
     ArrayList<T> tempArray = new ArrayList<T>(myArrayList.size());
     
+    tempArray.addAll(myArrayList); //prevents index out of bounds
+    
     mergeSort(myArrayList, comparator, start, end, tempArray);
+    
+    System.out.println(myArrayList.toString());
     
   }
   
@@ -56,16 +60,23 @@ public class SortUtil {
       ArrayList<T> tempArray) {
     
     int mid = 0;
-    if (end > start) {
-      
-      mid = (start + end) / 2;
-      
-      mergeSort(myArrayList, comparator, start, mid, tempArray);
-      mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
-      merge(myArrayList, comparator, start, mid, end, tempArray);
-      
+    int threshold = 10; 
+    
+    if(end - start < threshold) {
+      insertionSort(myArrayList, comparator, start, end);
     }
     
+    if (start >= end) {//end > start 
+      return; 
+    }
+    
+    
+    mid = (start + end) / 2;
+    
+    mergeSort(myArrayList, comparator, start, mid, tempArray);
+    mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
+    merge(myArrayList, comparator, start, mid, end, tempArray);
+
   }
   
   // Merges all the arrays into one
@@ -75,9 +86,11 @@ public class SortUtil {
     
     int k = start;
     int i = start;
-    int j = mid;
+    int j = mid + 1;
     
-    while (i < mid && j < end) {
+    
+    
+    while (i <= mid && j <= end) {
       
       if (comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0) {
         tempArray.set(k, myArrayList.get(i));
@@ -92,21 +105,21 @@ public class SortUtil {
       
     }
     
-    while (i < mid) {
+    while (i <= mid) {
       tempArray.set(k, myArrayList.get(i));
       i++;
       k++;
       
     }
     
-    while (j < end) {
+    while (j <= end) {
       tempArray.set(k, myArrayList.get(j));
       j++;
       k++;
       
     }
     
-    for (int x = 0; x < myArrayList.size(); x++) {
+    for (int x = start; x <= end; x++) {
       
       myArrayList.set(x, tempArray.get(x));
     }
