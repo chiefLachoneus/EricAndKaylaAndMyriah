@@ -144,6 +144,8 @@ public class SortUtil {
     }
     
     int pivotIndex = partition(myArrayList, comparator, lo, hi);
+    quicksort(myArrayList, comparator, lo, pivotIndex - 1);
+    quicksort(myArrayList, comparator, pivotIndex + 1, hi);
   }
   
   private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
@@ -155,8 +157,11 @@ public class SortUtil {
         swap(myArrayList, i, j);
       }
     }
+    if (comparator.compare(myArrayList.get(hi), myArrayList.get(i + 1)) < 0) {
+      swap(myArrayList, i + 1, hi);
+    }
     
-    return 0;
+    return i + 1;
   }
   
   public static ArrayList<Integer> generateBestCase(int size) {
