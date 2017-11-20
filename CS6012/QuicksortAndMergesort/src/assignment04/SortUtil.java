@@ -71,6 +71,7 @@ public class SortUtil {
   // Merges all the arrays into one
   public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int mid, int end,
       ArrayList<T> tempArray) {
+    // TODO: write a comparator and use insertionSort
     
     int k = start;
     int i = start;
@@ -137,29 +138,47 @@ public class SortUtil {
     quicksort(myArrayList, comparator, 0, myArrayList.size() - 1);
   }
   
-  private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int low, int high) {
+  private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int left, int right) {
     // arrays of size 1 already sorted.
-    if (low < high) {
-      int pivotIndex = partition(myArrayList, comparator, low, high);
-      quicksort(myArrayList, comparator, low, pivotIndex);
-      quicksort(myArrayList, comparator, pivotIndex + 1, high);
+    if (left >= right) {
+      return;
     }
     
+    int pivotIndex = partition(myArrayList, comparator, left, right);
+    quicksort(myArrayList, comparator, left, pivotIndex - 1);
+    quicksort(myArrayList, comparator, pivotIndex + 1, right);
   }
   
-  private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int low, int high) {
-    T pivotValue = myArrayList.get(low);
+  private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int left, int right) {
+    // find pivot and swap with right bound. Could be done in various ways.
+    Random rValue = new Random();
+    int pivotIndex = rValue.nextInt(right);
     
-    int leftwall = low;
-    for (int j = low + 1; j < high; j++) {
-      if (comparator.compare(myArrayList.get(j), pivotValue) < 0) {
-        swap(myArrayList.get(j), myArrayList.get(leftwall));
-        leftwall++;
+    swap(myArrayList, pivotIndex, right);
+    
+    pivotIndex = right;
+    T pivotValue = myArrayList.get(pivotIndex);
+    
+    int L = left;
+    int R = right - 1;
+    
+    while (L <= R) {
+      if (comparator.compare(myArrayList.get(L), pivotValue) <= 0) {
+        L++;
+        continue;
       }
+      if (comparator.compare(myArrayList.get(R), pivotValue) >= 0) {
+        R--;
+        continue;
+      }
+      
+      swap(myArrayList, L, R);
+      L++;
+      R--;
     }
-    swap(pivotValue, myArrayList.get(leftwall));
+    swap(myArrayList, L, right);
     
-    return leftwall;
+    return L;
   }
   
   public static ArrayList<Integer> generateBestCase(int size) {
@@ -209,20 +228,12 @@ public class SortUtil {
   }
   
   public static <T> void swap(ArrayList<T> myArrayList, int valueLHS, int valueRHS) {
+    
     T temp;
     
     temp = myArrayList.get(valueLHS);
     myArrayList.set(valueLHS, myArrayList.get(valueRHS));
     myArrayList.set(valueRHS, temp);
-    
-  }
-  
-  public static <T> void swap(T valueLHS, T valueRHS) {
-    T temp;
-    
-    temp = valueLHS;
-    valueLHS = valueRHS;
-    valueRHS = temp;
     
   }
   
