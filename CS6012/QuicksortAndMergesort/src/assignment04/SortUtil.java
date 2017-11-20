@@ -137,31 +137,29 @@ public class SortUtil {
     quicksort(myArrayList, comparator, 0, myArrayList.size() - 1);
   }
   
-  private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
+  private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int low, int high) {
     // arrays of size 1 already sorted.
-    if (lo >= hi) {
-      return;
+    if (low < high) {
+      int pivotIndex = partition(myArrayList, comparator, low, high);
+      quicksort(myArrayList, comparator, low, pivotIndex);
+      quicksort(myArrayList, comparator, pivotIndex + 1, high);
     }
     
-    int pivotIndex = partition(myArrayList, comparator, lo, hi);
-    quicksort(myArrayList, comparator, lo, pivotIndex - 1);
-    quicksort(myArrayList, comparator, pivotIndex + 1, hi);
   }
   
-  private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int lo, int hi) {
-    T pivotValue = myArrayList.get(hi);
-    int i = lo - 1;
-    for (int j = lo; j < hi - 1; j++) {
+  private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int low, int high) {
+    T pivotValue = myArrayList.get(low);
+    
+    int leftwall = low;
+    for (int j = low + 1; j < high; j++) {
       if (comparator.compare(myArrayList.get(j), pivotValue) < 0) {
-        i++;
-        swap(myArrayList, i, j);
+        swap(myArrayList.get(j), myArrayList.get(leftwall));
+        leftwall++;
       }
     }
-    if (comparator.compare(myArrayList.get(hi), myArrayList.get(i + 1)) < 0) {
-      swap(myArrayList, i + 1, hi);
-    }
+    swap(pivotValue, myArrayList.get(leftwall));
     
-    return i + 1;
+    return leftwall;
   }
   
   public static ArrayList<Integer> generateBestCase(int size) {
@@ -211,12 +209,20 @@ public class SortUtil {
   }
   
   public static <T> void swap(ArrayList<T> myArrayList, int valueLHS, int valueRHS) {
-    
     T temp;
     
     temp = myArrayList.get(valueLHS);
     myArrayList.set(valueLHS, myArrayList.get(valueRHS));
     myArrayList.set(valueRHS, temp);
+    
+  }
+  
+  public static <T> void swap(T valueLHS, T valueRHS) {
+    T temp;
+    
+    temp = valueLHS;
+    valueLHS = valueRHS;
+    valueRHS = temp;
     
   }
   
