@@ -82,7 +82,7 @@ public class SortUtilTest {
     bigIntArray.add(2147483647);
     bigIntArray.add(2147483500); 
     bigIntArray.add(2147483540); 
-    bigIntArray.add(2147483550); 
+    bigIntArray.add(2147483550);
     bigIntArray.add(2147483600); 
     
     sortedBigIntArray.add(2147483500);
