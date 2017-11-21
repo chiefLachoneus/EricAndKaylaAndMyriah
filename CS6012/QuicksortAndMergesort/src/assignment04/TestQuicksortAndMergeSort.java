@@ -15,10 +15,9 @@ public class TestQuicksortAndMergeSort {
   
   private ArrayList<Integer> arrayListOfInts = new ArrayList<>();
   private ArrayList<Integer> sortedArrayListOfInts = new ArrayList<>();
-  private ArrayList<Integer> nullArrayList = new ArrayList<>(); 
   private ArrayList<Integer> arrayWithOneInt = new ArrayList<>(); 
-  private ArrayList<Integer> bigIntArray = new ArrayList(); 
-  private ArrayList<Integer> sortedBigIntArray = new ArrayList(); 
+  private ArrayList<Integer> bigIntArray = new ArrayList<>(); 
+  private ArrayList<Integer> sortedBigIntArray = new ArrayList<>(); 
   
   
   @Before
@@ -124,7 +123,7 @@ public class TestQuicksortAndMergeSort {
   
   @Test
   public void testMergesort() {    
-    SortUtil.mergesort(arrayListOfInts, new IntComparator(), 10);
+    SortUtil.mergesort(arrayListOfInts, new NumberComparator(), 10);
     
     for(int i = 0; i < arrayListOfInts.size(); i++) {
       System.out.println(arrayListOfInts.get(i));
@@ -136,7 +135,7 @@ public class TestQuicksortAndMergeSort {
   public void testOneInt() {
     arrayWithOneInt.add(5); 
     
-    SortUtil.mergesort(arrayWithOneInt, new IntComparator(), 10);
+    SortUtil.mergesort(arrayWithOneInt, new NumberComparator(), 10);
     
     for(int i = 0; i < arrayWithOneInt.size(); i++) {
       assertTrue(arrayWithOneInt.get(i).equals(arrayWithOneInt.get(i)));
@@ -145,22 +144,11 @@ public class TestQuicksortAndMergeSort {
   
   @Test
   public void testBigInt() {
-    SortUtil.mergesort(bigIntArray, new IntComparator(), 10);
+    SortUtil.mergesort(bigIntArray, new NumberComparator(), 10);
     
     for(int i = 0; i < bigIntArray.size(); i++) {
       assertTrue(bigIntArray.get(i).equals(sortedBigIntArray.get(i)));
     }
   }
-  
-//@Test
-//public void testNullArrayList() {
-//  nullArrayList.add(null); 
-//  nullArrayList.add(null);
-//  
-//  for(int i = 0; i < nullArrayList.size(); i++) {
-//    assertTrue(nullArrayList.get(i).equals(nullArrayList.get(i)));
-//  }
-//  
-//}
   
 }

@@ -38,11 +38,7 @@ public class SortUtil {
    * @param myArrayList
    * @param comparator
    */
-  // Driver for mergeSort
-  public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int threshold) {
-    // need to call insertionSort() method somewhere in here, may have to
-    // reconfigure the code a bit
-    
+  public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int threshold) {    
     int start = 0;
     int end = myArrayList.size() - 1;
     ArrayList<T> tempArray = new ArrayList<T>(myArrayList.size());
@@ -51,11 +47,17 @@ public class SortUtil {
     
     mergeSort(myArrayList, comparator, start, end, tempArray, threshold);
     
-    //System.out.println(myArrayList.toString());
-    
   }
   
-  // recursive mergeSort method
+  /**
+   * This method is the recursive mergeSort method called in the driver, mergesort above
+   * @param myArrayList
+   * @param comparator
+   * @param start
+   * @param end
+   * @param tempArray
+   * @param threshold
+   */
   public static <T> void mergeSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end,
       ArrayList<T> tempArray, int threshold) {
     
@@ -66,7 +68,7 @@ public class SortUtil {
       insertionSort(myArrayList, comparator, start, end);
     }
     
-    if (start >= end) {//end > start 
+    if (start >= end) {
       return; 
     }
     
@@ -80,7 +82,15 @@ public class SortUtil {
 
   }
   
-  // Merges all the arrays into one
+  /**
+   * Method merges all arrays into one array
+   * @param myArrayList
+   * @param comparator
+   * @param start
+   * @param mid
+   * @param end
+   * @param tempArray
+   */
   public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int mid, int end,
       ArrayList<T> tempArray) {
     int k = start;
@@ -90,36 +100,31 @@ public class SortUtil {
     
     
     while (i <= mid && j <= end) {
-      
+     
       if (comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0) {
         tempArray.set(k, myArrayList.get(i));
         i++;
       } else {
-        
         tempArray.set(k, myArrayList.get(j));
         j++;
       }
       
       k++;
-      
     }
     
     while (i <= mid) {
       tempArray.set(k, myArrayList.get(i));
       i++;
       k++;
-      
     }
     
     while (j <= end) {
       tempArray.set(k, myArrayList.get(j));
       j++;
       k++;
-      
     }
     
     for (int x = start; x <= end; x++) {
-      
       myArrayList.set(x, tempArray.get(x));
     }
     
@@ -127,17 +132,6 @@ public class SortUtil {
   
   /**
    * This method performs a quicksort on the generic ArrayList given as input.
-   * 
-   * For the quicksort algorithm, see the class notes and/or the textbook. You
-   * must implement three different strategies for determining the pivot. Your
-   * quicksort implementation should be able to easily switch among these
-   * strategies. (Consider using a few private helper methods for your different
-   * pivot selection strategies.) You will perform experiments to determine which
-   * pivot strategy works best (see the Analysis Document). Your quicksort may
-   * also switch to insertion sort on some small threshold if you wish.
-   * 
-   * In designing a strategy for choosing a pivot, keep in mind that its running
-   * time affects the overall running time of the quicksort.
    * 
    * Note: The above two methods are intended to be driver methods. You will need
    * to write recursive methods that contain the full implementations of the
@@ -150,6 +144,13 @@ public class SortUtil {
     quicksort(myArrayList, comparator, 0, myArrayList.size() - 1);
   }
   
+  /**
+   * method is called by the quicksort driver, sets the pivot index and recurses through quicksort method
+   * @param myArrayList
+   * @param comparator
+   * @param left
+   * @param right
+   */
   private static <T> void quicksort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int left, int right) {
     // arrays of size 1 already sorted.
     if (left >= right) {
@@ -161,6 +162,14 @@ public class SortUtil {
     quicksort(myArrayList, comparator, pivotIndex + 1, right);
   }
   
+  /**
+   * partition finds the pivot, calls comparator and swap
+   * @param myArrayList
+   * @param comparator
+   * @param left
+   * @param right
+   * @return
+   */
   private static <T> int partition(ArrayList<T> myArrayList, Comparator<? super T> comparator, int left, int right) {
     // find pivot and swap with right bound. Could be done in various ways.
     Random rValue = new Random();
@@ -193,6 +202,11 @@ public class SortUtil {
     return L;
   }
   
+  /**
+   * method generates the best case scenario given a size
+   * @param size
+   * @return
+   */
   public static ArrayList<Integer> generateBestCase(int size) {
     // This method generates and returns an ArrayList of integers 1 to size in
     // ascending order.
@@ -211,18 +225,12 @@ public class SortUtil {
   
   /**
    * This method generates and returns an ArrayList of integers 1 to size in
-   * permuted order (i,e., randomly ordered). I will show you in class how to
-   * permute a list.
+   * permuted order (i,e., randomly ordered). 
    * 
    * @param size
    * @return
    */
   public static ArrayList<Integer> generateAverageCase(int size) {
-    
-    // This method generates and returns an ArrayList of integers 1 to size in
-    // permuted order (i,e., randomly ordered). I will show you in class how to
-    // permute a list.
-    
     Random rand = new Random(17);
     ArrayList<Integer> myArrayList = new ArrayList<>();
     
@@ -239,6 +247,12 @@ public class SortUtil {
     
   }
   
+  /**
+   * This method swaps the value of the lhs and rhs
+   * @param myArrayList
+   * @param valueLHS
+   * @param valueRHS
+   */
   public static <T> void swap(ArrayList<T> myArrayList, int valueLHS, int valueRHS) {
     
     T temp;
@@ -257,10 +271,6 @@ public class SortUtil {
    * @return
    */
   public static ArrayList<Integer> generateWorstCase(int size) {
-    
-    // This method generates and returns an ArrayList of integers 1 to size in
-    // descending order.
-    
     ArrayList<Integer> myArrayList = new ArrayList<>();
     
     for (int i = size; i >= 1; i--) {
