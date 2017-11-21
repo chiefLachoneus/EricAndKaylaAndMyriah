@@ -75,6 +75,7 @@ public class SortUtil {
     
     mergeSort(myArrayList, comparator, start, mid, tempArray);
     mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
+    
     merge(myArrayList, comparator, start, mid, end, tempArray);
 
   }
@@ -82,8 +83,6 @@ public class SortUtil {
   // Merges all the arrays into one
   public static <T> void merge(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int mid, int end,
       ArrayList<T> tempArray) {
-    // TODO: write a comparator and use insertionSort
-    
     int k = start;
     int i = start;
     int j = mid + 1;
