@@ -39,7 +39,7 @@ public class SortUtil {
    * @param comparator
    */
   // Driver for mergeSort
-  public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator) {
+  public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int threshold) {
     // need to call insertionSort() method somewhere in here, may have to
     // reconfigure the code a bit
     
@@ -49,18 +49,18 @@ public class SortUtil {
     
     tempArray.addAll(myArrayList); //prevents index out of bounds
     
-    mergeSort(myArrayList, comparator, start, end, tempArray);
+    mergeSort(myArrayList, comparator, start, end, tempArray, threshold);
     
-    System.out.println(myArrayList.toString());
+    //System.out.println(myArrayList.toString());
     
   }
   
   // recursive mergeSort method
   public static <T> void mergeSort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int start, int end,
-      ArrayList<T> tempArray) {
+      ArrayList<T> tempArray, int threshold) {
     
     int mid = 0;
-    int threshold = 10; 
+     
     
     if(end - start < threshold) {
       insertionSort(myArrayList, comparator, start, end);
@@ -73,8 +73,8 @@ public class SortUtil {
     
     mid = (start + end) / 2;
     
-    mergeSort(myArrayList, comparator, start, mid, tempArray);
-    mergeSort(myArrayList, comparator, mid + 1, end, tempArray);
+    mergeSort(myArrayList, comparator, start, mid, tempArray, threshold);
+    mergeSort(myArrayList, comparator, mid + 1, end, tempArray, threshold);
     
     merge(myArrayList, comparator, start, mid, end, tempArray);
 
