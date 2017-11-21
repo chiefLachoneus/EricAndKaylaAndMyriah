@@ -1,7 +1,6 @@
 package assignment04;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SortDriver {
   
@@ -47,8 +46,6 @@ public class SortDriver {
         //SortUtil.mergesort(copiedArray, new NumberComparator(), 15);
         stopTime = System.nanoTime();
         totalTime += stopTime - startTime;
-        
-        // Place CODE HERE
       }
       
       double averageTime = (double)totalTime / timesToLoop;

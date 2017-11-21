@@ -41,10 +41,13 @@ public class SortUtil {
   public static <T> void mergesort(ArrayList<T> myArrayList, Comparator<? super T> comparator, int threshold) {    
     int start = 0;
     int end = myArrayList.size() - 1;
+    
+    //create temp array and set it to the size of the original array
     ArrayList<T> tempArray = new ArrayList<T>(myArrayList.size());
     
     tempArray.addAll(myArrayList); //prevents index out of bounds
     
+    //call the other mergesort method
     mergeSort(myArrayList, comparator, start, end, tempArray, threshold);
     
   }
@@ -62,24 +65,29 @@ public class SortUtil {
       ArrayList<T> tempArray, int threshold) {
     
     int mid = 0;
-     
     
+    //base case 1
+    //if the end of the array - start of the array is less than the threshold defined, use insertion sort
     if(end - start < threshold) {
       insertionSort(myArrayList, comparator, start, end);
     }
     
+    //base case 2
+    //if the start of the array is greater than or equal to the end, return out of the function
     if (start >= end) {
       return; 
     }
     
-    
+    //calculate the middle position of the array
     mid = (start + end) / 2;
     
+    //recursive calls
     mergeSort(myArrayList, comparator, start, mid, tempArray, threshold);
     mergeSort(myArrayList, comparator, mid + 1, end, tempArray, threshold);
     
+    //call merge after recursive calls are complete
     merge(myArrayList, comparator, start, mid, end, tempArray);
-
+    
   }
   
   /**
@@ -100,7 +108,7 @@ public class SortUtil {
     
     
     while (i <= mid && j <= end) {
-     
+      //use comparator to compare i (start) and j (mid + 1), if they are less than zero then value at i < value at j
       if (comparator.compare(myArrayList.get(i), myArrayList.get(j)) < 0) {
         tempArray.set(k, myArrayList.get(i));
         i++;
@@ -112,18 +120,21 @@ public class SortUtil {
       k++;
     }
     
+    //sets data from the first array (after split)
     while (i <= mid) {
       tempArray.set(k, myArrayList.get(i));
       i++;
       k++;
     }
     
+    //sets data from the second array (after split)
     while (j <= end) {
       tempArray.set(k, myArrayList.get(j));
       j++;
       k++;
     }
     
+    //set the data in the temporary array
     for (int x = start; x <= end; x++) {
       myArrayList.set(x, tempArray.get(x));
     }
@@ -204,12 +215,11 @@ public class SortUtil {
   
   /**
    * method generates the best case scenario given a size
+   * returns and ArrayList of integers 1 to size in ascending order
    * @param size
    * @return
    */
   public static ArrayList<Integer> generateBestCase(int size) {
-    // This method generates and returns an ArrayList of integers 1 to size in
-    // ascending order.
     
     ArrayList<Integer> myArrayList = new ArrayList<>();
     
