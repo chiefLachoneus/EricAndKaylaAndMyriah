@@ -33,7 +33,7 @@ public class SortDriver {
         }
         startTime = System.nanoTime();
 //        SortUtil.quicksort(copiedArray, new NumberComparator());
-         SortUtil.mergesort(copiedArray, new NumberComparator(), 2);
+         SortUtil.mergesort(copiedArray, new NumberComparator(), 10);
         stopTime = System.nanoTime();
         totalTime += stopTime - startTime;
       }
