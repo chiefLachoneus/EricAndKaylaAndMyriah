@@ -17,7 +17,7 @@ public class SortUtil {
     for (int i = start; i < end; i++) {
       index = myArrayList.get(i);
       int j = i;
-      while (j > 0 && comparator.compare(myArrayList.get(j - 1), index) > 0) {
+      while (j > start && comparator.compare(myArrayList.get(j - 1), index) > 0) {
         myArrayList.set(j, myArrayList.get(j - 1));
         j--;
       }
@@ -68,8 +68,9 @@ public class SortUtil {
     
     //base case 1
     //if the end of the array - start of the array is less than the threshold defined, use insertion sort
-    if(end - start < threshold) {
+    if((end - start) < threshold) {
       insertionSort(myArrayList, comparator, start, end);
+      return;
     }
     
     //base case 2
